@@ -1,0 +1,28 @@
+---
+layout: page
+---
+
+{{ content }}
+
+{% assign category_name = page.title | downcase %}
+{% assign posts = site.categories[category_name] %}
+
+{% if posts.size > 0 %}
+<ul class="post-list">
+    {% for post in posts %}
+    <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+                {{ post.title | escape }}
+            </a>
+        </h3>
+        {% if post.excerpt %}
+        {{ post.excerpt }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No posts found in this category.</p>
+{% endif %}
